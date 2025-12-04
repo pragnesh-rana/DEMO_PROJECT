@@ -1,0 +1,65 @@
+Project: Blog API with Node.js, TypeScript, and Prisma AS a learing project
+
+Tech Stack:
+- Backend: Node.js with Express
+- Language: TypeScript
+- ORM: Prisma
+- Database: (Specify your database, e.g., PostgreSQL/MySQL/SQLite)
+- Authentication: JWT (JSON Web Tokens)
+
+Key Features Implemented:
+1. User Registration
+   - Email, name, and password handling
+   - Input validation and error handling
+   - Secure password hashing
+
+2. User Authentication
+   - JWT-based authentication
+   - Protected routes
+   - Token-based session management
+
+3. User Management
+   - Get user details
+   - Update user information
+   - Delete user account
+
+Problems Solved:
+1. Type Safety
+   - Fixed TypeScript type errors
+   - Added proper type definitions
+   - Implemented strict null checks
+
+2. Code Organization
+   - Separated concerns (routes, controllers, services)
+   - Removed unused code
+   - Improved code maintainability
+
+3. Security
+   - Input validation
+   - Secure password storage
+   - Protected API endpoints
+
+4. API Documentation
+   - Created Postman collection
+   - Documented all endpoints
+   - Added request/response examples
+
+Dependencies:
+- @prisma/client
+- express
+- jsonwebtoken
+- bcryptjs
+- typescript
+- @types/
+
+Environment Setup:
+1. Install dependencies: npm install
+2. Set up database connection in .env
+3. Run migrations: npx prisma migrate dev
+4. Start server: npm run dev
+
+API Endpoints:
+- POST /api/users - Create user
+- GET /api/users/:id - Get user by ID
+- PUT /api/users/:id - Update user (protected)
+- DELETE /api/users/:id - Delete user (protected)
