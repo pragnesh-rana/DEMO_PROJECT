@@ -5,8 +5,20 @@ export async function findAllUsers() {
   return prisma.user.findMany();
 }
 
+export async function findUserById(id: number) {
+  return prisma.user.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      // Exclude password
+    }
+  });
+}
+
 export async function createUser(email: string, name: string | null = null) {
   return prisma.user.create({
-    data: { email, name,password:"123456" }
+    data: { email, name, password: "123456" }
   });
 }

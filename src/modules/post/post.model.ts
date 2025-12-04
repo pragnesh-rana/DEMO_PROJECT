@@ -17,6 +17,22 @@ export async function countPosts(where?: any) {
   return prisma.post.count({ where });
 }
 
+// Get posts by author
+export async function findPostsByAuthor(authorId: number, where?: any, skip?: number, take?: number) {
+  const filters = {
+    ...where,
+    authorId
+  };
+
+  return prisma.post.findMany({
+    where: filters,
+    include: { author: true },
+    orderBy: { createdAt: 'desc' },
+    ...(skip !== undefined && { skip }),
+    ...(take !== undefined && { take })
+  });
+}
+
 // Get post by ID
 export async function findPostById(id: number) {
   return prisma.post.findUnique({

@@ -6,7 +6,8 @@ import {
   updatePostService,
   deletePostService,
   togglePublishService,
-  incrementViewCountService
+  incrementViewCountService,
+  getPostsByAuthorService
 } from "./post.service.js";
 
 export async function getPosts(req: Request, res: Response, next: NextFunction) {
@@ -127,6 +128,26 @@ export async function togglePublish(req: Request, res: Response, next: NextFunct
       return res.status(404).json({ success: false, message: "Post not found" });
     }
     res.json({ success: true, data: updatedPost });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getPostsByAuthor(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authorId = Number(req.params.authorId);
+    const { page = 1, limit = 10 } = req.query;
+    const user = req.user as { userId: number } | undefined;
+
+    // Visibility filter: show published posts, or if viewing own profile, show drafts too
+    let filters: any = { published: true };
+    if (user && user.userId === authorId) {
+      // User viewing their own profile - show all posts
+      filters = {};
+    }
+
+    const result = await getPostsByAuthorService(authorId, filters, Number(page), Number(limit));
+    res.json({ success: true, ...result });
   } catch (err) {
     next(err);
   }

@@ -5,7 +5,8 @@ import {
   createPost,
   updatePost,
   removePost,
-  togglePublish
+  togglePublish,
+  getPostsByAuthor
 } from "./post.controller.js";
 import { authMiddleware } from "../../middlewares/auth.middleware.js";
 import { optionalAuthMiddleware } from "../../middlewares/optionalAuth.middleware.js";
@@ -13,6 +14,7 @@ import { optionalAuthMiddleware } from "../../middlewares/optionalAuth.middlewar
 const router = Router();
 
 router.get("/", optionalAuthMiddleware, getPosts);
+router.get("/author/:authorId", optionalAuthMiddleware, getPostsByAuthor);
 router.get("/:id", optionalAuthMiddleware, getPost);
 
 // Protected routes
